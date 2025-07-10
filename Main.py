@@ -1,13 +1,18 @@
 import telebot
 import psycopg2
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-bot = telebot.TeleBot("7772980080:AAGwUXoFhXXAaIJZtzp2XGSNm2B3hoUIXZU")
+bot = telebot.TeleBot(os.getenv("TOKEN"))
+
 connection = psycopg2.connect(
-        host = "127.0.0.1",
+        host = "postgres",
         user = "postgres",
-        password = "322692",
-        database = "postgres"
-    )
+        password = "postgres",
+        database = "postgres",
+        port = 5432
+)
 connection.autocommit = True
 
 with open("init.sql", "r") as script:
@@ -18,7 +23,8 @@ with open("init.sql", "r") as script:
 @bot.message_handler(func=lambda message: True)
 def new_message(message):
     with connection.cursor() as cursor:
-        cursor.execute("INSERT INTO messages (username , message_user, date_message) VALUES(%s, %s, %s)" % (str(message.from_user.username), str(message.text), str(message.date)))
+        cursor.execute("INSERT INTO messages (username , message_user, date_message) VALUES(%s, %s, %s);", (message.from_user.username, message.text, message.date))
+        bot.reply_to(message, "Записанно")
 
 bot.polling()
 connection.close()

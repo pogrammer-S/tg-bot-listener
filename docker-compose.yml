@@ -1,0 +1,16 @@
+services:
+  postgres:
+      image: postgres
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: postgres
+      ports: 
+       - "5432:5432"
+  bot:
+    depends_on:
+      - postgres
+    build: .
+    env_file: C:\Users\praktikant\Documents\GitHub\tg-bot-listener\environment_variables.env
+    ports:
+      - "5000:5000"
