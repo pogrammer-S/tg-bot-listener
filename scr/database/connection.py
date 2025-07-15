@@ -13,6 +13,6 @@ connection = psycopg2.connect(
 )
 connection.autocommit = True
 
-with open("./SQL_Con/init.sql", "r") as script:
+with open("./scr/database/init.sql", "r") as script:
     with connection.cursor() as cursor:
         cursor.execute(script.read())

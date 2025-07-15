@@ -1,6 +1,6 @@
-from Bot_Listener.Bot import bot 
-from SQL_Con.ConnectionSQL import connection
-from Bot_Listener.listener import *
+from scr.bot.bot import bot 
+from scr.database.connection import connection
+from scr.bot.listener import *
 
 bot.polling()
 connection.close()
