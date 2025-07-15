@@ -1,2 +1,2 @@
 # tg-bot-listener
-![alt text](.\docs\image.png)
+![alt text](docs/image.png)

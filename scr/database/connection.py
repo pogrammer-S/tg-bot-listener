@@ -12,7 +12,3 @@ connection = psycopg2.connect(
         port = 5432
 )
 connection.autocommit = True
-
-with open("./scr/database/init.sql", "r") as script:
-    with connection.cursor() as cursor:
-        cursor.execute(script.read())
