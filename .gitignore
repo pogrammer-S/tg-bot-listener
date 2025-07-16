@@ -1,1 +1,14 @@
 *.env
+/.idea/dataSources/82b04195-8300-47a0-8edd-12164fbd124a/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta
+/.idea/dataSources/82b04195-8300-47a0-8edd-12164fbd124a/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta
+/.idea/dataSources/82b04195-8300-47a0-8edd-12164fbd124a/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta
+/.idea/dataSources/82b04195-8300-47a0-8edd-12164fbd124a/storage_v2/_src_/database/postgres.edMnLQ.meta
+/.idea/dataSources/82b04195-8300-47a0-8edd-12164fbd124a.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/dataSources.local.xml
+/.idea/dataSources.xml
+/.idea/misc.xml
+/.idea/sqldialects.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
