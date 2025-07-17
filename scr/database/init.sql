@@ -1,20 +1,22 @@
-CREATE TABLE IF NOT EXISTS users(
+CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL PRIMARY KEY,
     t_name VARCHAR(255) NOT NULL,
-    created_at INT NOT NULL
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
 );
 
-CREATE TABLE IF NOT EXISTS messages(
-    id serial PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS messages (
+    id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    message_text VARCHAR(255) NOT NULL,
-    created_at INT NOT NULL,
+    text TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS attachments(
-    user_id INT NOT NULL,
-    mime_type VARCHAR(255) NOT NULL,
-    paths TEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES messages (id) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS attachments (
+    id SERIAL PRIMARY KEY,
+    message_id INT NOT NULL,
+    mime_type VARCHAR(50) NOT NULL,
+    path TEXT NOT NULL,
+    FOREIGN KEY (message_id) REFERENCES messages (id) ON DELETE CASCADE
 );

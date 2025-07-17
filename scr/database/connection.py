@@ -1,14 +1,23 @@
-import os
-from dotenv import load_dotenv
+from scr.config.config import load_config
 import psycopg2
+from psycopg2 import pool
 
-load_dotenv()
+config = load_config()
 
-connection = psycopg2.connect(
-        host = os.getenv("DB_HOST"),
-        user = os.getenv("DB_USER"),
-        password = os.getenv("DB_PASSWORD"),
-        database = os.getenv("DB_NAME"),
-        port = 5432
-)
-connection.autocommit = True
+POSTGRES_PARAMS = {
+    'host': config.DB_HOST,
+    'user': config.DB_USER,
+    'password': config.DB_PASSWORD,
+    'database': config.DB_NAME,
+    'port': config.DB_PORT
+}
+
+connection_pool = psycopg2.pool.SimpleConnectionPool(1, 10, **POSTGRES_PARAMS)
+
+
+def get_connection():
+    return connection_pool.getconn()
+
+
+def put_connection(conn):
+    connection_pool.putconn(conn)
