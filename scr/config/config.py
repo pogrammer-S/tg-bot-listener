@@ -22,4 +22,5 @@ def load_config():
         DB_PASSWORD=get_env_or_raise("DB_PASSWORD", "PostgreSQL password"),
         DB_NAME=get_env_or_raise("DB_NAME", "PostgreSQL database name"),
         DB_PORT=int(os.getenv("DB_PORT", 5432)),
+        WEBHOOK_URL=get_env_or_raise("WEBHOOK_URL", "URL n8n")
     )

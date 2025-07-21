@@ -1,10 +1,13 @@
 from scr.bot.utils import unix_to_timestamp, get_user_display_name
-from scr.database.db_service import store_message, upsert_user
+from scr.database.db_service import store_message, upsert_user, get_analysis_data
 from scr.bot.bot import bot
 
 
+print("handlers запущен")
+
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
+    bot.send_message(719467479, "Обработчик работает...")
     """Обработчик новых сообщений (текст, фото, документы)."""
     try:
         # Обновляем или создаем пользователя
@@ -22,3 +25,6 @@ def handle_text(message):
         bot.reply_to(message, f"Произошла ошибка при обработке сообщения, {str(e)}")
 
 # TODO: добавить ещё хэндлеры
+
+def test_message():
+    bot.send_message(719467479, get_analysis_data())

@@ -10,13 +10,21 @@ services:
       - ./scr/database/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+  n8n:
+    image: n8nio/n8n:nightly-amd64
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./.n8n:/home/node/.n8n
   bot:
     depends_on:
       - postgres
+      - n8n
     build: .
     env_file: ./.env
     volumes:
       - .:/app
+
 
 volumes:
   pgdata:
