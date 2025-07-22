@@ -14,7 +14,7 @@ def summarize_dialogue(data):
     try:
         test_message()
         response = requests.post(webhook_url, json=json.dumps(data))
-        return response.json()
+        return str(response.json())
     except requests.exceptions.RequestException as e:
         return "Ошибка при запросе к LLM:" + str(e)
 

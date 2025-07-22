@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from typing import Any, Optional, List, Tuple, Literal
 from scr.database.connection import get_connection, put_connection
+import json
 
 
 @contextmanager
@@ -63,13 +64,18 @@ def store_attachment(message_id: int, mime_type: str, path: str) -> None:
     query = "INSERT INTO attachments (message_id, mime_type, path) VALUES (%s, %s, %s);"
     execute_query(query, (message_id, mime_type, path))
 
+def store_report(report : str, created_at: Optional[datetime] = None) -> None:
+    """Сохранение ответа LLM"""
+    query = "INSERT INTO reports (report, created_at) VALUES (%s, %s);"
+    execute_query(query, (report, created_at))
 
 def get_analysis_data() -> List[Tuple]:
     """Получение данных для анализа."""
     query = '''
-        SELECT u.id, u.t_name, u.created_at AS user_created_at, m.text, m.created_at AS message_created_at
+        SELECT u.id, u.t_name, TO_CHAR(u.created_at, 'YYYY-MM-DD HH24:MI:SS') AS user_created_at, m.text, TO_CHAR(m.created_at, 'YYYY-MM-DD HH24:MI:SS') AS message_created_at
         FROM messages m
         JOIN users u ON m.user_id = u.id
+        WHERE m.created_at >= NOW() - INTERVAL '1 week'
         ORDER BY m.created_at
     '''
     return execute_query(query, fetch="all") or []

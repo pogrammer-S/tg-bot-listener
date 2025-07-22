@@ -1,7 +1,7 @@
 from scr.bot.utils import unix_to_timestamp, get_user_display_name
 from scr.database.db_service import store_message, upsert_user, get_analysis_data
 from scr.bot.bot import bot
-
+import logging
 
 print("handlers запущен")
 
@@ -27,4 +27,4 @@ def handle_text(message):
 # TODO: добавить ещё хэндлеры
 
 def test_message():
-    bot.send_message(719467479, get_analysis_data())
+    logging.info(str(get_analysis_data()))
