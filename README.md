@@ -34,6 +34,8 @@ tg-bot-listener/
 │   │   ├── db_service.py        # Работа с БД (CRUD)
 │   │   ├── connection.py        # Подключение к Postgres
 │   │   └── init.sql             # Миграции БД
+|   ├── llm/
+│   │   ├── client.py            # Подключение к n8n и получение результата от llm
 │   └── scheduler/
 │       ├── __init__.py
 │       ├── scheduler.py         # Запуск планировщика (cron)
@@ -62,6 +64,7 @@ DB_USER=postgres
 DB_PASSWORD=postgres
 DB_NAME=postgres
 DB_PORT=5432
+WEBHOOK_URL=URL webhook n8n
 ```
 
 ### 3. Запустите через Docker Compose
@@ -80,7 +83,8 @@ docker-compose up -d --build
 - **main.py**: запускает планировщик (APScheduler) и polling бота.
 - **scr/bot/handlers.py**: регистрирует обработчики сообщений, сохраняет пользователей и сообщения, реагирует на текст.
 - **scr/database/db_service.py**: все операции с БД (Postgres).
-- **scr/scheduler/pipline.py**: раз в неделю собирает сообщения, обрабатывает их (заглушка LLM), отправляет summary в чат.
+- **scr/llm/client.py**: соединение с llm в n8n, отправляет результат в pipline.py
+- **scr/scheduler/pipline.py**: раз в неделю собирает сообщения, обрабатывает их (через LLM), отправляет summary в чат.
 - **scr/config/config.py**: централизованная загрузка переменных окружения.
 
 ---
