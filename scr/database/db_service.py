@@ -3,7 +3,6 @@ import logging
 from datetime import datetime
 from typing import Any, Optional, List, Tuple, Literal
 from scr.database.connection import get_connection, put_connection
-import json
 
 
 @contextmanager
