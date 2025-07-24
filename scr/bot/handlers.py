@@ -1,6 +1,7 @@
 from scr.bot.utils import unix_to_timestamp, get_user_display_name
 from scr.database.db_service import store_message, upsert_user
 from scr.bot.bot import bot
+from . import commands
 
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
