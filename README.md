@@ -67,7 +67,13 @@ DB_PORT=5432
 WEBHOOK_URL=URL webhook n8n
 ```
 
-### 3. Запустите через Docker Compose
+### 3. Выключите приватность бота
+
+```
+В @BotFather напишите комманду /setprivacy, после чего выбирите нужного бота и пропишите Disable
+```
+
+### 4. Запустите через Docker Compose
 
 ```bash
 docker-compose up -d --build
